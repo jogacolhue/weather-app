@@ -16,8 +16,8 @@ export const cities = (state = {}, action) => {
         [city]: { ...state[city], forecastData }
       };
     }
-    case GET_WEATHER_CITY: { 
-      const city  = action.payload; 
+    case GET_WEATHER_CITY: {
+      const city = action.payload;
       return {
         ...state,
         [city]: { ...state[city], weather: null, error: null }
@@ -52,7 +52,8 @@ const fromObjToArray = cities =>
   toPairs(cities).map(([key, value]) => ({
     key,
     name: key,
-    data: value.weather
+    data: value.weather,
+    error: value.error
   }));
 
 export const getWeatherCities = createSelector(

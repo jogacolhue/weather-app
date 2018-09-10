@@ -61,7 +61,7 @@ export const setWeather = payload => {
           const weather = transformWeather(weather_data);
           dispatch(setWeatherCity({ city, weather }));
         })
-        .catch(err => {
+        .catch(err => { 
           const error = err.message;
           dispatch(setWeatherCityError({ city, error }));
         });

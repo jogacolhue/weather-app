@@ -9,7 +9,7 @@ const LocationList = ({ cities, onSelectedLocation }) => {
     onSelectedLocation(city);
   };
 
-  const stringToComponent = cities => { 
+  const stringToComponent = cities => {  
     return cities.map(city => (
       <WeatherLocation
         key={city.key}
