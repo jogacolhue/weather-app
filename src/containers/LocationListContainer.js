@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { setCity } from "../actions";
-import  LocationList  from "../components/LocationList";
+import { setSelectedCity, setWeather } from "../actions";
+import { getWeatherCities } from "../reducers";
+import LocationList from "../components/LocationList";
 
 export class LocationListContainer extends Component {
+  componentDidMount = () => {
+    this.props.setWeather(this.props.cities);
+  };
+
   static propTypes = {
     setCity: PropTypes.func.isRequired,
-    cities: PropTypes.array.isRequired,
+    cities: PropTypes.array.isRequired
   };
 
   handleSelectedLocation = city => {
@@ -18,7 +23,7 @@ export class LocationListContainer extends Component {
   render() {
     return (
       <LocationList
-        cities={this.props.cities}
+        cities={this.props.citiesWeather}
         onSelectedLocation={this.handleSelectedLocation}
       />
     );
@@ -26,10 +31,17 @@ export class LocationListContainer extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setCity: value => dispatch(setCity(value))
+  setCity: value => dispatch(setSelectedCity(value)),
+  setWeather: cities => dispatch(setWeather(cities))
 });
 
+const mapStateToProps = state => { 
+  return ({
+    citiesWeather: getWeatherCities(state)
+  });
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LocationListContainer);
