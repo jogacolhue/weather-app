@@ -13,28 +13,28 @@ export const cities = (state = {}, action) => {
       const { city, forecastData } = action.payload;
       return {
         ...state,
-        [city]: { forecastData }
+        [city]: { ...state[city], forecastData }
       };
     }
-    case GET_WEATHER_CITY: {
-      const { city } = action.payload;
+    case GET_WEATHER_CITY: { 
+      const city  = action.payload; 
       return {
         ...state,
-        [city]: { weather: null, error: null }
+        [city]: { ...state[city], weather: null, error: null }
       };
     }
     case SET_WEATHER_CITY: {
       const { city, weather } = action.payload;
       return {
         ...state,
-        [city]: { weather }
+        [city]: { ...state[city], weather }
       };
     }
     case SET_WEATHER_CITY_ERROR: {
       const { city, error } = action.payload;
       return {
         ...state,
-        [city]: { error }
+        [city]: { ...state[city], error }
       };
     }
 
@@ -55,4 +55,7 @@ const fromObjToArray = cities =>
     data: value.weather
   }));
 
-export const getWeatherCities = createSelector(state => fromObjToArray(state), cities => cities);
+export const getWeatherCities = createSelector(
+  state => fromObjToArray(state),
+  cities => cities
+);

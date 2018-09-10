@@ -26,7 +26,7 @@ WeatherLocation.propTypes = {
     weatherState: PropTypes.string.isRequired,
     humidity: PropTypes.number.isRequired,
     wind: PropTypes.string.isRequired
-  }).isRequired
+  })
 };
 
 export default WeatherLocation;

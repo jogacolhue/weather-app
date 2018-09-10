@@ -35,7 +35,8 @@ const mapDispatchToProps = dispatch => ({
   setWeather: cities => dispatch(setWeather(cities))
 });
 
-const mapStateToProps = state => { 
+const mapStateToProps = state => {    
+  //debugger;
   return ({
     citiesWeather: getWeatherCities(state)
   });
