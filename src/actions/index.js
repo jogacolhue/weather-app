@@ -26,11 +26,20 @@ const url = "https://api.openweathermap.org/data/2.5/forecast";
 const urlWeather = "https://api.openweathermap.org/data/2.5/weather";
 
 export const setSelectedCity = payload => {
-  return dispatch => {
+  return (dispatch, getState) => {
     const api_weather = `${url}?q=${payload}&appid=${api_key}`;
 
     // activar en el estado un indicador de búsqueda de datos
     dispatch(setCity(payload));
+
+    const state = getState(); 
+    const date = state.cities[payload] &&  state.cities[payload].forecastDataDate;
+
+    const now  = new Date();
+
+    if (date && (now-date) < 1 * 60 *1000 ){
+      return;
+    }
 
     return fetch(api_weather)
       .then(data => {
